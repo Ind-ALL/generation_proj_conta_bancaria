@@ -1,18 +1,33 @@
 import readline = require("readline-sync");
 import { colors } from './src/util/colors';
 import { Conta } from "./src/model/conta";
+import { ContaCorrente } from "./src/model/contaCorrente";
+import { ContaPoupanca } from "./src/model/contaPoupanca";
 
 export function main() {
   let opcao: number;
 
   let c1: Conta = new Conta(1, 123, 1, "Jon Snow", 100)
   c1.visualizar();
-
-  c1.sacar(10);
+  c1.sacar(200);
+  c1.visualizar();
+  c1.depositar(1);
   c1.visualizar();
 
-  c1.depositar(150);
-  c1.visualizar();
+  const cc1: ContaCorrente = new ContaCorrente(11, 456, 1, "Sansa Stark", 50 ,500);
+  cc1.visualizar();
+  cc1.sacar(300);
+  cc1.visualizar();
+  cc1.depositar(50);
+  cc1.visualizar();
+
+  const cp1: ContaPoupanca = new ContaPoupanca(15, 789, 2, "Rei Robert", 10000, 12);
+  cp1.visualizar();
+  cp1.sacar(9500);
+  cp1.visualizar();
+  cp1.depositar(2);
+  cp1.visualizar();
+
 
   while (true) {
     console.log(colors.bg.black, colors.fg.cyan,"*****************************************************");
