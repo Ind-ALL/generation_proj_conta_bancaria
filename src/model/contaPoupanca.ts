@@ -1,4 +1,3 @@
-import { Z_FILTERED } from "zlib";
 import { Conta } from "./conta";
 
 export class ContaPoupanca extends Conta {

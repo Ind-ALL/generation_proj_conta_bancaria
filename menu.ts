@@ -7,12 +7,12 @@ import { ContaPoupanca } from "./src/model/contaPoupanca";
 export function main() {
   let opcao: number;
 
-  let c1: Conta = new Conta(1, 123, 1, "Jon Snow", 100)
-  c1.visualizar();
-  c1.sacar(200);
-  c1.visualizar();
-  c1.depositar(1);
-  c1.visualizar();
+  // let c1: Conta = new Conta(1, 123, 1, "Jon Snow", 100)
+  // c1.visualizar();
+  // c1.sacar(200);
+  // c1.visualizar();
+  // c1.depositar(1);
+  // c1.visualizar();
 
   const cc1: ContaCorrente = new ContaCorrente(11, 456, 1, "Sansa Stark", 50 ,500);
   cc1.visualizar();
