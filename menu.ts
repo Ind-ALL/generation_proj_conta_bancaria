@@ -3,9 +3,16 @@ import { colors } from './src/util/colors';
 import { Conta } from "./src/model/conta";
 import { ContaCorrente } from "./src/model/contaCorrente";
 import { ContaPoupanca } from "./src/model/contaPoupanca";
+import { contaController } from "./src/controller/contaController";
 
 export function main() {
   let opcao: number;
+
+  let contas: contaController = new contaController();
+
+  let cc2: ContaCorrente = new ContaCorrente(45, 654, 1, "Bran Stark", 400, 1200);
+
+  contas.cadastrar(cc2);
 
   // let c1: Conta = new Conta(1, 123, 1, "Jon Snow", 100)
   // c1.visualizar();
@@ -65,6 +72,8 @@ export function main() {
         break;
       case 2:
         console.log("\n\nListar todas as Contas\n\n");
+
+          contas.listarTodas();
 
         break;
       case 3:
