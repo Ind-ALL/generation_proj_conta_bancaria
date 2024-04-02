@@ -87,13 +87,13 @@ export abstract class Conta{
         break;
     }
 
-    console.log("********************************************************");
-    console.log("                   Dados da Conta                    ");
-    console.log("********************************************************");
+    console.log(colors.fg.magentastrong,"+------------------------------------------------------+");
+    console.log(" |                   Dados da Conta                     |");
+    console.log(" +------------------------------------------------------+", colors.reset);
     console.log("Número da conta: " + this._numero);
     console.log("Número da agência: " + this._agencia);
     console.log("Tipo da conta: " + tipo);
     console.log("Titular da conta: " + this._titular);
-    console.log("Saldo da conta: " + this._saldo);
+    console.log("Saldo da conta: " + this._saldo.toFixed(2));
   }
 }

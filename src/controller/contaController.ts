@@ -13,11 +13,12 @@ export class contaController implements ContaRepository{
     if(buscaConta != null){
       buscaConta.visualizar();
     }else{
-      console.log(colors.fg.red, "\nA conta numero: " + numero + " não foi encontrada!", colors.reset);
+      console.log(colors.bg.red, colors.fg.redstrong, "A conta numero: " + numero + " não foi encontrada!", colors.reset);
     }
   }
 
   listarTodas(): void {
+    
     for(let conta of this.listaContas){
       conta.visualizar();
     }
@@ -25,7 +26,8 @@ export class contaController implements ContaRepository{
 
   cadastrar(conta: Conta): void {
     this.listaContas.push(conta);
-    console.log(colors.fg.green, "\n Conta número: " + conta.numero + " foi criada com sucesso!", colors.reset);
+    console.log("\n")
+    console.log(colors.bg.greenbright, colors.fg.greenstrong, conta.numero + "° conta criada com sucesso!", colors.reset);
   }
 
   atualizar(conta: Conta): void {
@@ -33,9 +35,9 @@ export class contaController implements ContaRepository{
 
     if(buscaConta != null){
       this.listaContas[this.listaContas.indexOf(buscaConta)] = conta;
-      console.log(colors.fg.green, "\nA conta numero: " + conta.numero + " foi atualizada com sucesso!", colors.reset);
+      console.log(colors.bg.greenbright, colors.fg.greenstrong,"A conta numero: " + conta.numero + " foi atualizada com sucesso!", colors.reset);
     }else{
-      console.log(colors.fg.red, "\nA conta numero: " + conta.numero + " não foi econtrada!", colors.reset);
+      console.log(colors.bg.red, colors.fg.redstrong, "A conta numero: " + conta.numero + " não foi econtrada!", colors.reset);
     }
   }
 
@@ -44,22 +46,50 @@ export class contaController implements ContaRepository{
 
     if(buscaConta != null){
       this.listaContas.splice(this.listaContas.indexOf(buscaConta), 1);
-      console.log(colors.fg.greenstrong, "\nA conta numero " + numero + " foi apagada com sucesso!", colors.reset);
+      console.log(colors.bg.greenbright, colors.fg.greenstrong, "A conta numero " + numero + " foi apagada com sucesso!", colors.reset);
     }else{
-      console.log(colors.fg.red, "\nA conta numero: " + numero + " não foi encotrada!", colors.reset);
+      console.log(colors.bg.red, colors.fg.redstrong,"A conta numero: " + numero + " não foi encotrada!", colors.reset);
     }
   }
 
   sacar(numero: number, valor: number): void {
-    throw new Error("Method not implemented.");
+    let conta = this.buscarNoArray(numero);
+
+    if(conta != null){
+
+      if(conta.sacar(valor) == true){
+        console.log(colors.bg.greenbright, colors.fg.greenstrong, "O SAque na conta numero: " + numero + " foi efetuado com sucesso!", colors.reset);
+      }else{
+        console.log(colors.bg.red, colors.fg.redstrong,"A conta numero: " + numero + " não foi encontrada!", colors.reset);
+      }
+    }
+
+    
   }
 
   depositar(numero: number, valor: number): void {
-    throw new Error("Method not implemented.");
+    let conta = this.buscarNoArray(numero);
+
+    if(conta != null){
+      conta.depositar(valor);
+      console.log(colors.bg.green, colors.fg.greenstrong,"O depósito na conta numero: " + numero + " foi efetuado com sucesso!", colors.reset);
+    }else{
+      console.log(colors.bg.red, colors.fg.redstrong,"A conta numero: " + numero + " não foi encontrada!", colors.reset);
+    }
   }
 
   transferir(numeroOrigem: number, numeroDestino: number, valor: number): void {
-    throw new Error("Method not implemented.");
+    let contaOrigem = this.buscarNoArray(numeroOrigem);
+    let contaDestino = this.buscarNoArray(numeroDestino);
+
+    if(contaOrigem != null && contaDestino != null){
+      if(contaOrigem.sacar(valor) == true){
+        contaDestino.depositar(valor);
+        console.log(colors.bg.greenbright, colors.fg.greenstrong,"A transferência da conta número: " + numeroOrigem + " para a conta número: " + numeroDestino + " foi efetuada com sucesso!", colors.reset);
+      }
+    }else{
+      console.log(colors.bg.red, colors.fg.redstrong,"A conta número: " + numeroOrigem + " e/ou a conta número: " + numeroDestino + " não foram encontradas!", colors.reset);
+    }
   }
 
   //Gerar número da conta
